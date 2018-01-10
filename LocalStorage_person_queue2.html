@@ -1,0 +1,112 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<!--+ дописать добавление человека в очередь
++ переписать Person при помощи конструктора (http://learn.javascript.ru/constructor-new)
++ добавить стилизацию
++ по желанию кто умееть можете сделать форму с полями  и кнопку а
+внизу таблицу (но это только тем кто уже знает как это делать. Так как я это не расказывал)-->
+<html>
+<head>
+    <meta charset=“UTF-8">
+    <title>Person's queue</title>
+    <style>
+        td { border: 1px solid red;}
+        th { border: 1px solid blue;}
+    </style>
+    <script type="text/javascript">
+        window.onload = function() {
+            var list = [];
+            var person = {
+                Name: '',
+                Surname: '',
+                Age: '',
+                Sex: '',
+                Languages: []
+            };
+
+            var exit = false;
+
+            do {
+                var todo = +prompt('Enter action: 1 - Add person; 2 - Show list; 3 - Exit ');
+                switch (todo) {
+                    case 1: {
+                        addPerson(list);
+                        break;
+                    }
+                    case 2: {
+                        showList(list);
+                        exit = true;
+                        break;
+                    }
+                    case 3:
+                    case 0: {
+                        exit = true;
+                    }
+                }
+            } while (!exit)
+
+            function Person() {
+                /*если много было бы в объекте свойств и их нужно бы было заполнить через цикл
+                *  for (var property in person){
+                   person[property]= prompt('Enter '+property);
+               }*/
+                this.Name = prompt('Enter name');
+                this.Surname = prompt('Enter surname');
+                this.Age = +prompt('Enter age');
+                this.Sex = prompt('Enter sex');
+                var str = prompt('Enter languages with spaces');
+                this.Languages = str.split(" ");
+            }
+
+
+            function addPerson(list) {
+                var pee = new Person();
+                if (window.localStorage.list) {
+                    list=JSON.parse(window.localStorage.list);
+                }
+                list.push(pee);
+                localStorage['list']=JSON.stringify(list);
+            }
+
+            function showList(list) {
+                if (window.localStorage.list) {
+
+                    list=JSON.parse(window.localStorage.list);
+
+                    var table = document.createElement('table');
+                        /*создаем шапку таблицы*/
+                        var rowhead = document.createElement('tr');
+                        /*вариант через цикл*/
+                        table.appendChild(rowhead);
+                        //заполняем шапку таблицы ключами
+                        for (var key in person) {
+                            var colhead = document.createElement('th');
+                            colhead.innerText = key;
+                            rowhead.appendChild(colhead);
+                        }
+
+                        /*заполняем содержимое таблицы по строкам i-я строка- i-й человек*/
+                        for (var index = 0; index < list.length; index++) {
+                            var row = document.createElement('tr');
+                            table.appendChild(row);
+                            for (property in list[index]) {
+                                var td = document.createElement('td');
+                                td.innerText = list[index][property];
+                                row.appendChild(td);
+                            }
+                        }
+                        document.body.appendChild(table);
+                    }
+                    else{
+
+                    document.write("Queue is empty. Add persons first.");
+
+                }
+
+            }
+        }
+    </script>
+</head>
+<body>
+</body>
+</html>
