@@ -1,0 +1,136 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Создание гистограммы</title>
+    <script src="BarChart.js"></script>
+    <script>
+        window.addEventListener("load", function () {
+
+            var arrAreas = []; // объявляем массив с данными
+
+            arrAreas[0] = {
+                name: "Дніпропетровська",
+                label: "60"
+            }
+            arrAreas[1] = {
+                name: "Сумська",
+                label: "45"
+            }
+            arrAreas[2] = {
+                name: "м. Київ",
+                label: "42"
+            }
+            arrAreas[3] = {
+                name: "Одеська",
+                label: "37"
+            }
+            arrAreas[4] = {
+                name: "Житомирська",
+                label: "36"
+            }
+            arrAreas[5] = {
+                name: "Миколаївська",
+                label: "36"
+            }
+            arrAreas[6] = {
+                name: "Донецька",
+                label: "36"
+            }
+            arrAreas[7] = {
+                name: "Київська",
+                label: "34"
+            }
+            arrAreas[8] = {
+                name: "Вінницька",
+                label: "30"
+            }
+            arrAreas[9] = {
+                name: "Рівненська",
+                label: "30"
+            }
+            arrAreas[10] = {
+                name: "Харківська",
+                label: "26"
+            }
+            arrAreas[11] = {
+                name: "Чернівецька",
+                label: "25"
+            }
+            arrAreas[12] = {
+                name: "Кіровоградська",
+                label: "23"
+            }
+            arrAreas[13] = {
+                name: "Черкаська",
+                label: "23"
+            }
+            arrAreas[14] = {
+                name: "Запорізька",
+                label: "22"
+            }
+            arrAreas[15] = {
+                name: "Полтавська",
+                label: "22"
+            }
+            arrAreas[16] = {
+                name: "Львівська",
+                label: "20"
+            }
+            arrAreas[17] = {
+                name: "Волинська",
+                label: "20"
+            }
+            arrAreas[18] = {
+                name: "Чернігівська",
+                label: "17"
+            }
+            arrAreas[19] = {
+                name: "Хмельницька",
+                label: "16"
+            }
+            arrAreas[20] = {
+                name: "Закарпатська",
+                label: "12"
+            }
+            arrAreas[21] = {
+                name: "Івано-Франківська",
+                label: "12"
+            }
+            arrAreas[22] = {
+                name: "Луганська",
+                label: "11"
+            }
+            arrAreas[23] = {
+                name: "Тернопільська",
+                label: "10"
+            }
+            arrAreas[24] = {
+                name: "Херсонська",
+                label: "5"
+            }
+            arrAreas[25] = {
+                name: "м. Севастополь",
+                label: "0"
+            }
+            arrAreas[26] = {
+                name: "AР Крим",
+                label: "0"
+            }
+
+            var chart = createBarChart(arrAreas,
+                510,
+                500,
+                "green");
+
+            var container = document.getElementById("chartContainer");
+            container.appendChild(chart);
+        });
+    </script>
+
+</head>
+<body>
+<br>
+<br>
+    <div id="chartContainer"></div>
+</body>
+</html>
