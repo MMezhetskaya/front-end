@@ -1,0 +1,53 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Ключевое слово this в обработчике</title>
+    <script>
+        window.onload = function () {
+
+            var pArr = document.getElementsByTagName("p");
+            var length = pArr.length;
+            var kArr = [];
+
+            for (var i = 0; i < length; i++) {
+                kArr[i] = false;//==green по умолчанию
+            }
+
+
+            var handler =function () {
+                var index = Array.prototype.indexOf.call(pArr, this);
+                console.log ("[index] "+index+" kArr[index] "+kArr[index]);
+                if (kArr[index]==false) {
+                    pArr[index].style.backgroundColor="red";
+                    kArr[index]=true;
+                }
+                else{
+                    pArr[index].style.backgroundColor="green";
+                    kArr[index]=false;
+                }
+
+            }
+
+            for (var i = 0; i < pArr.length; i++) {
+                pArr[i].onclick =handler;
+            }
+
+        }
+    </script>
+    <style>
+        p {
+            background-color:green;
+            float: left;
+            height: 50px;
+            width: 50px;
+            margin: 10px;
+        }
+    </style>
+</head>
+<body>
+    <p></p>
+    <p></p>
+    <p></p>
+    <p></p>
+</body>
+</html>

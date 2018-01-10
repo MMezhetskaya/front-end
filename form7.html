@@ -1,0 +1,344 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<!--1 Доделать валидацию вашей формы так что бы ошибки показывать в span под полем
+ для ввода(обсудили на паре)
+Вот пример `moneysend.mastercard.ua`
+ -->
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Метод test()</title>
+    <script type="text/javascript">
+        // Метод test возвращает true если метод exec возвращает не null;
+        //name
+        window.onload = function () {
+            var valid_name = false;
+            var valid_email = false;
+            var valid_tel = false;
+            var name=false;
+            var email=false;
+            var tel=false;
+            /****/
+            var name_pattern = /\D/;
+            var email_pattern = /([A-z0-9_.-]{1,})@([A-z0-9_.-]{1,}).([A-z]{2,8})/;
+            var tel_pattern = /\+([0-9]{1,3})(\([0-9]{2,3}\))-([0-9]{3})-([0-9]{2})-([0-9]{2})/;
+           /***/
+
+            document.getElementById('name').onfocus = function () {
+                console.log('on_focus name');
+                document.getElementById("span_error_name").style.display="none";
+                document.getElementById("label_name").style.transform="translate(0px,-20px)";
+                document.getElementById("name").style.border ="1px solid #ccc";
+            };
+
+
+
+            document.getElementById('name').onblur = function () {
+                name = document.getElementById("name").value;
+                /*var name_pattern = /\D/;*/
+                var test_name = name_pattern.test(name);
+                if (!name)
+                {
+                    document.getElementById("span_error_name").innerText="this field is required";
+                    document.getElementById("label_name").style.transform="translate(0px,0px)";
+                    document.getElementById("name").style.border = "1px solid red";
+                    document.getElementById("span_error_name").style.display="inline";
+                    return;
+                }
+                if(test_name === false){
+                    document.getElementById("label_name").style.transform="translate(0px,-20px)";
+                    document.getElementById("span_error_name").innerText="name includes just letters";
+                    document.getElementById("span_error_name").style.display="inline";
+                    document.getElementById("name").style.border = "1px solid red";
+                }
+
+            };
+
+            document.getElementById('name').oninput = function () {
+                name = document.getElementById("name").value;
+                /*var name_pattern = /\D/;*/
+                var test_name = name_pattern.test(name);
+                if (!name)
+                {
+                    document.getElementById("span_error_name").innerText="this field is required";
+                    document.getElementById("label_name").style.transform="translate(0px,0px)";
+                    document.getElementById("name").style.border ="1px solid #ccc";
+                    document.getElementById("span_error_name").style.display="none";
+                    return;
+                }
+                document.getElementById("label_name").style.transform="translate(0px,15px)";
+                if (test_name === false) {
+                    document.getElementById("label_name").style.transform="translate(0px,-20px)";
+                    document.getElementById("span_error_name").innerText="name includes just letters";
+                    document.getElementById("span_error_name").style.display="inline";
+                    document.getElementById("name").style.border = "1px solid red";
+                }
+                else {
+                    document.getElementById("label_name").style.transform="translate(0px,-20px)";
+                    document.getElementById('name').style.border = "1px solid green";
+                    document.getElementById("span_error_name").style.display="none";
+                    valid_name = true;
+                }
+            };
+
+
+            document.getElementById('email').onfocus = function () {
+                document.getElementById("span_error_mail").style.display="none";
+                document.getElementById("label_email").style.transform="translate(0px,-20px)";
+                document.getElementById("email").style.border ="1px solid #ccc";
+            };
+
+            document.getElementById('email').onblur = function () {
+                email = document.getElementById("email").value;
+                /*var email_pattern = /([A-z0-9_.-]{1,})@([A-z0-9_.-]{1,}).([A-z]{2,8})/;*/
+                var test_email = email_pattern.test(email);
+                if (!email)
+                {
+                    document.getElementById("span_error_mail").innerText="this field is required";
+                    document.getElementById("label_email").style.transform="translate(0px,0px)";
+                    document.getElementById("email").style.border = "1px solid red";
+                    document.getElementById("span_error_mail").style.display="inline";
+                    return;
+                }
+                if (test_email === false) {
+                    document.getElementById("label_email").style.transform="translate(0px,-20px)";
+                    document.getElementById("span_error_mail").innerText="input correct e-mail";
+                    document.getElementById("span_error_mail").style.display="inline";
+                    document.getElementById("email").style.border = "1px solid red";
+                }
+            };
+
+
+            document.getElementById('email').oninput = function () {
+                /*var*/ email = document.getElementById("email").value;
+                /*var email_pattern = /([A-z0-9_.-]{1,})@([A-z0-9_.-]{1,}).([A-z]{2,8})/;*/
+                var test_email = email_pattern.test(email);
+                if (!email)
+                {
+                    document.getElementById("span_error_mail").innerText="this field is required";
+                    document.getElementById("label_email").style.transform="translate(0px,0px)";
+                    document.getElementById("email").style.border ="1px solid #ccc";
+                    document.getElementById("span_error_mail").style.display="none";
+                    return;
+                }
+                document.getElementById("label_email").style.transform="translate(0px,15px)";
+                if (test_email === false) {
+                    document.getElementById("label_email").style.transform="translate(0px,-20px)";
+                    document.getElementById("span_error_mail").innerText="input correct e-mail";
+                    document.getElementById("span_error_mail").style.display="inline";
+                    document.getElementById("email").style.border = "1px solid red";
+                }
+                else {
+                    document.getElementById("label_email").style.transform="translate(0px,-20px)";
+                    document.getElementById('email').style.border = "1px solid green";
+                    document.getElementById("span_error_mail").style.display="none";
+                    valid_email = true;
+                }
+            };
+
+
+            document.getElementById('tel').onfocus = function () {
+                console.log('on_focus tel');
+                document.getElementById("span_error_tel").style.display="none";
+                document.getElementById("label_tel").style.transform="translate(0px,-20px)";
+                document.getElementById("tel").style.border ="1px solid #ccc";
+            };
+
+            document.getElementById('tel').onblur = function () {
+                tel = document.getElementById("tel").value;
+                var test_tel = tel_pattern.test(tel);
+                if (!tel)
+                {
+                    document.getElementById("span_error_tel").innerText="this field is required";
+                    document.getElementById("label_tel").style.transform="translate(0px,0px)";
+                    document.getElementById("tel").style.border = "1px solid red";
+                    document.getElementById("span_error_tel").style.display="inline";
+                    return;
+                }
+                if(test_tel === false){
+                    document.getElementById("label_tel").style.transform="translate(0px,-20px)";
+                    document.getElementById("span_error_tel").innerText="input phone in correct view +380(xx)-xxx-xx-xx";
+                    document.getElementById("span_error_tel").style.display="inline";
+                    document.getElementById("tel").style.border = "1px solid red";
+                }
+
+            };
+
+            document.getElementById('tel').oninput = function () {
+                tel = document.getElementById("tel").value;
+                var test_tel = tel_pattern.test(tel);
+                console.log('oninput tel');
+                if (!tel)
+                {
+                    document.getElementById("span_error_tel").innerText="this field is required";
+                    document.getElementById("label_tel").style.transform="translate(0px,0px)";
+                    document.getElementById("tel").style.border ="1px solid #ccc";
+                    document.getElementById("span_error_tel").style.display="none";
+                    return;
+                }
+                document.getElementById("label_tel").style.transform="translate(0px,15px)";
+                if (test_tel === false) {
+                    document.getElementById("label_tel").style.transform="translate(0px,-20px)";
+                    document.getElementById("span_error_tel").innerText="input phone in correct view +380(xx)-xxx-xx-xx";
+                    document.getElementById("span_error_tel").style.display="inline";
+                    document.getElementById("tel").style.border = "1px solid red";
+                }
+                else {
+                    document.getElementById("label_tel").style.transform="translate(0px,-20px)";
+                    document.getElementById('tel').style.border = "1px solid green";
+                    document.getElementById("span_error_tel").style.display="none";
+                    valid_tel = true;
+                }
+            };
+
+            /***
+           document.getElementById('tel').oninput = function () {
+                tel = document.getElementById("tel").value;
+                //console.log("tel-> "+ tel);
+               //var tel_pattern = /\+([0-9]{1,3})(\([0-9]{2,3}\))-([0-9]{3})-([0-9]{2})-([0-9]{2})/;
+                var test_tel = tel_pattern.test(tel);
+
+                if (test_tel === false) {
+                    //console.log ('hi wrong tel');
+                    document.getElementById("tel").style.border = "1px solid red";
+                }
+                else {
+                    document.getElementById("tel").style.border = "1px solid green";
+                    valid_tel = true;
+                }
+            };
+
+**/
+
+
+            document.getElementById('submit').onclick = function (event) {
+                //именно function(e), чтобы сохранить неверное значение при нажатии кнопки
+                console.log(name);
+                if (!name) {
+                    document.getElementById("span_error_name").innerText="this field is required";
+                    document.getElementById("label_name").style.transform="translate(0px,0px)";
+                    document.getElementById("name").style.border = "1px solid red";
+                    document.getElementById("span_error_name").style.display="inline";
+                    event.preventDefault();
+                }
+
+                 if (!email){
+                    document.getElementById("span_error_mail").innerText="this field is required";
+                    document.getElementById("label_email").style.transform="translate(0px,0px)";
+                    document.getElementById("email").style.border = "1px solid red";
+                    document.getElementById("span_error_mail").style.display="inline";
+                    event.preventDefault();
+                }
+                if(!tel){
+                    document.getElementById("span_error_tel").innerText="this field is required";
+                    document.getElementById("label_tel").style.transform="translate(0px,0px)";
+                    document.getElementById("tel").style.border = "1px solid red";
+                    document.getElementById("span_error_tel").style.display="inline";
+                    event.preventDefault();
+                }
+
+               if(!valid_name||!valid_email||!valid_tel){
+                    /*alert('прервано функцией preventDefault');*/
+                    event.preventDefault();
+                }
+            };
+        };
+
+
+    </script>
+</head>
+<body>
+<style>
+
+    .container {
+        margin: 80px auto;
+        width: 640px;
+    }
+    .wrapper {
+        position: relative;
+        margin: 150px auto 0 auto;
+        padding: 20px 20px 20px;
+        width: 180px;
+        background: #d1d5d9;
+        border-radius: 3px;
+    }
+    input{
+        outline: none;
+        border: 1px solid #ccc;
+    }
+    .input_div{
+        height:60px;
+    }
+
+    label{
+        position:absolute;
+        left: 21px;
+        color: gray;
+        transition: all 0.5s ease-in-out;
+    }
+    #label_name{
+        top: 20px;
+    }
+    #label_email{
+        top: 80px;
+    }
+    #label_tel{
+        top: 140px;
+    }
+    span{
+        position:absolute;
+        display: none;
+        left: 23px;
+        color: red;
+    }
+
+    #span_error_name{
+        top: 40px;
+    }
+    #span_error_mail{
+        top: 100px;
+    }
+    #span_error_tel{
+        top: 160px;
+    }
+
+ </style>
+<section class="container">
+    <div class="wrapper">
+        <form method="post" action="">
+            <div class='input_div' position="relative">
+                <input id='name' type="text" name="name"  required />
+            </div>
+            <label id='label_name' >name</label>
+            <span id='span_error_name'> span_error_name</span>
+
+            <div class='input_div' position="relative">
+                <input id='email' type="email" name="email"  required />
+            </div>
+            <label id='label_email' >e-mail</label>
+            <span id='span_error_mail'>span_error_email</span>
+
+           <!-- <div class='input_div' position="relative">
+                <input id='tel' type="text" name="tel"  required />
+            </div>
+            <label id='label_tel' >tel. +380(93)-000-00-00</label>
+            <span id='span_error_tel'>span_error_tel</span>-->
+            <div class='input_div' position="relative">
+                <input id='tel' type="text" name="tel" required />
+            </div>
+            <label id='label_tel' >tel</label>
+            <span id='span_error_tel'> span_error_tel</span>
+
+            <!--p><input id='tel' type="text" name="tel" placeholder="tel. +380(93)-000-00-00" title ="input phone in correct view +380(xx)-xxx-xx-xx "required /> </p-->
+
+            <input id='submit' type="submit" value="Send!">
+
+        </form>
+    </div>
+</section>
+
+
+
+
+
+</body>
+</html>
