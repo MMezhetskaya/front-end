@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Document title</title>
+        <meta name="description" content="description for Google">
+        <meta name="author" content="Marya Mezhetskaya">
+        <link rel="stylesheet" type="text/css" href="css/style.css">
+
+    </head>
+    <body>
+        <section class="menu">
+        </section>
+        <section class="content">
+            <h1>Пример суммы через замыкание</h1>
+            <p> Напишите функцию sum, которая будет работать так:</br>
+                sum(1)(2) == 3; // 1 + 2 </br>
+                sum(1)(2)(3) == 6; // 1 + 2 + 3</br>
+                sum(5)(-1)(2) == 6</br>
+                sum(6)(-1)(-2)(-3) == 0</br>
+                sum(0)(1)(2)(3)(4)(5) == 15</br>
+                Количество скобок может быть любым.</br>
+            </p>
+            <p>Пример такой функции для двух аргументов – есть в решении задачи <a href="https://learn.javascript.ru/task/closure-sum">Сумма через замыкание.</a></br>
+            <h3> Подсказка</h3>
+            <p> Чтобы sum(1), а также sum(1)(2) можно было вызвать новыми скобками – результатом sum должна быть функция.</p>
+            <p>Но эта функция также должна уметь превращаться в число. Для этого нужно дать ей соответствующий valueOf. А если мы хотим, чтобы и в строковом контексте она вела себя так же – то toString.</p>
+            </br>
+            <script type="text/javascript">
+                function sum(a) {
+                    //функция sum срабатывает только один раз. Она возвращает функцию f.
+                    //Затем, при каждом запуске функция f добавляет параметр к сумме currentSum,
+                    // хранящейся в замыкании, и возвращает сама себя.
+                    //В последней строчке f нет рекурсивного вызова.
+                    var currentSum = a;
+                    function f(b) {
+                        //Эта f используется при следующем вызове, опять возвратит себя, и так сколько нужно раз.
+                        currentSum += b;
+                        return f;//// <-- не вызывает сама себя, а возвращает ссылку на себя
+                    }
+                    console.log(f);
+                    f.toString = function() {
+                        //Затем, при использовании в строчном или численном контексте –
+                        // сработает toString, который вернет текущую сумму currentSum.
+                        return currentSum;
+                    };
+                    return f;
+                }
+                document.write( "sum(1)(2): "+sum(1)(2) +"</br>" ); // 3
+                document.write( "sum(5)(-1)(2): "+sum(5)(-1)(2)+"</br>" ); // 6
+                document.write( "sum(6)(-1)(-2)(-3): "+sum(6)(-1)(-2)(-3) +"</br>" ); // 0
+                document.write( "sum(0)(1)(2)(3)(4)(5): "+sum(0)(1)(2)(3)(4)(5) +"</br>" ); // 15
+           </script>
+        </section>
+        <footer align="center">
+            <br> &copy; 2018 - All right reserved
+        </footer>
+    </body>
+</html>
