@@ -1,0 +1,53 @@
+body{
+    margin: 0;
+    padding: 0;
+    font-size: 16px;
+}
+header{
+    background-color:#ACAFAF;
+    color: white;
+    margin: 0;
+    padding: 5px;
+}
+
+input{
+    border-radius: 4px;
+}
+
+/***************************************/
+
+.app-name,#newList{
+    font-family: Arial;
+    color: #fff;
+    font-weight: 700;
+    font-size: 30px;
+    margin: 0;
+    padding: 0;
+    text-align: center;
+    font-style: italic ;
+}
+.lists-container{
+    padding: 20px;
+    position: relative;
+}
+
+.list, #newList{
+    width: 270px;
+    background-color: #e3e3e3;
+    border:none;
+    border-radius: 4px;
+    padding: 10px;
+    vertical-align: top;
+    position: relative;
+}
+#newList{
+    font-weight: 400;
+    font-size: 14px;
+    text-align: left;
+    font-style: normal;
+}
+#newList:hover{
+    background-color:#ACAFAF;
+}
+
+
